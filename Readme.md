@@ -2,6 +2,8 @@
 
 A multi-agent workflow to resolve tasks using powershell scripts.
 
+To those who struggles with lengthy powershell command.
+
 ### Workflow overview
 ![Workflow](asset/image.png)
 
