@@ -74,7 +74,5 @@ var groupChat = new GroupChat(
 // start the chat by asking customer service to create a greeting message
 var greetingMessage = await customerService.SendAsync("Create a greeting message for the user and asking them if they have any pwsh task to resolve", ct: default);
 
-// wait for enter
-Console.ReadLine();
 // start the chat
 await customerService.SendMessageToGroupAsync(groupChat, [greetingMessage], maxRound: 20);
