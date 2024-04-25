@@ -19,4 +19,5 @@ The workflow can be easily extended to support the following scenarios:
 
 ### Example
 Below is an example of how the workflow works, the question being asked is "listing all files and its size, and sort by size in descending order".
+
 ![Example](asset/output.gif)
