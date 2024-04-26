@@ -19,7 +19,11 @@ The workflow can be easily extended to support the following scenarios:
 - approve script before execution: Asking user for approval before executing the script.
 - support more bash languages: Adding more engineers!
 
-### Example
-Below is an example of how the workflow works, the question being asked is "listing all files and its size, and sort by size in descending order".
+### Examples
+Below are some examples of the tasks that can be resolved using this workflow.
 
+#### listing all files and its size, and sort by size in descending order.
 ![Example](asset/output.gif)
+
+#### switch to light theme
+
