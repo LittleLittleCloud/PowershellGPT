@@ -6,7 +6,7 @@
     <Authors>LittleLittleCloud</Authors>
     <Product>PowershellGPT</Product>
     <Description>A GPT that resolves tasks using powershell</Description>
-    <PackageTags>AI, Artificial Intelligence, SDK</PackageTags>
+    <PackageTags>AI, Artificial Intelligence, SDK, Powershell, GPT</PackageTags>
     <PackageId>$(AssemblyName)</PackageId>
 
     <!-- Required license, copyright, and repo information. Packages can override. -->
