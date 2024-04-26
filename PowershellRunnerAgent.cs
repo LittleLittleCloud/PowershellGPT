@@ -40,15 +40,15 @@ internal class PowershellRunnerAgent : IAgent
                 var errorMessage = powershell.Streams.Error.Select(e => e.ToString()).Aggregate((a, b) => $"{a}\n{b}");
                 errorMessage = @$"[ERROR]
 {errorMessage}";
-                return Task.FromResult<IMessage>(new TextMessage(Role.Assistant, errorMessage));
+                return Task.FromResult<IMessage>(new TextMessage(Role.Assistant, errorMessage, from: this.Name));
             }
             else
             {
-                var successMessage = powershell.Streams.Information.Select(e => e.ToString()).Aggregate((a, b) => $"{a}\n{b}");
+                var successMessage = powershell.Streams.Information?.Select(e => e.ToString()).Aggregate((a, b) => $"{a}\n{b}") ?? "no output";
                 successMessage = @$"[SUCCESS]
 {successMessage}";
 
-                return Task.FromResult<IMessage>(new TextMessage(Role.Assistant, successMessage));
+                return Task.FromResult<IMessage>(new TextMessage(Role.Assistant, successMessage, from: this.Name));
             }
 //            // save the script to a temporary file which has a .ps1 extension
 //            var tempFile = Path.GetTempFileName();
