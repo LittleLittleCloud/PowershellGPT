@@ -28,6 +28,10 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         global-json-file: global.json
+    - uses: nuget/setup-nuget@v2
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
     - name: Restore dependencies
       run: |
         dotnet restore -bl
