@@ -1,8 +1,37 @@
-## Powershell.GPT
+## PS.GPT
 
 A dotnet tool which uses multi-agent workflow to resolve tasks using powershell scripts.
 
 To those who struggles with lengthy powershell command.
+
+### Get start
+> [!Note]
+> Before running the tool, you need to set up the following environment variables:
+> - `OPENAI_API_KEY`: The key of the OpenAI service.
+> - `OPENAI_MODEL_ID`: The model to use, if not set, it will use the `gpt-3.5-turbo-0125`.
+> or if you want to use Azure OpenAI service, you need to set up the following environment variables:
+> - `AZURE_OPENAI_ENDPOINT`: The endpoint of the Azure OpenAI service.
+> - `AZURE_OPENAI_KEY`: The key of the Azure OpenAI service.
+> - `AZURE_OPENAI_DEPLOY_NAME`: The model of the Azure OpenAI service.
+
+#### Install the tool
+```bash
+dotnet tool install -g PS.GPT
+```
+#### Run the tool using ps-gpt command
+```bash
+ps-gpt
+```
+#### Ask your question
+```bash
+list all files assending by size
+```
+
+### Examples
+Below are some examples of the tasks that can be resolved using this workflow.
+
+#### listing all files and its size, and sort by size in descending order.
+![Example](asset/output.gif)
 
 ### Workflow overview
 ![Workflow](asset/image.png)
@@ -18,12 +47,3 @@ To those who struggles with lengthy powershell command.
 The workflow can be easily extended to support the following scenarios:
 - approve script before execution: Asking user for approval before executing the script.
 - support more bash languages: Adding more engineers!
-
-### Examples
-Below are some examples of the tasks that can be resolved using this workflow.
-
-#### listing all files and its size, and sort by size in descending order.
-![Example](asset/output.gif)
-
-#### switch to light theme
-

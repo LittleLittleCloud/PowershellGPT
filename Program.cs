@@ -5,14 +5,32 @@ using AutoGen.Core;
 using Azure.AI.OpenAI;
 using Powershell.GPT;
 
-var AZURE_OPENAI_ENDPOINT = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new ArgumentNullException("AZURE_OPENAI_ENDPOINT");
-var AZURE_OPENAI_KEY = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY") ?? throw new ArgumentNullException("AZURE_OPENAI_API_KEY");
+var AZURE_OPENAI_ENDPOINT = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
+var AZURE_OPENAI_KEY = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
+var AZURE_DEPLOYMENT_NAME = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOY_NAME");
+var OPENAI_API_KEY = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+var OPENAI_MODEL_ID = Environment.GetEnvironmentVariable("OPENAI_MODEL_ID") ?? "gpt-3.5-turbo-0125";
 
-var client = new OpenAIClient(new Uri(AZURE_OPENAI_ENDPOINT), new Azure.AzureKeyCredential(AZURE_OPENAI_KEY));
+OpenAIClient client;
+bool useAzure = false;
+if (AZURE_OPENAI_ENDPOINT is string && AZURE_OPENAI_KEY is string && AZURE_DEPLOYMENT_NAME is string)
+{
+    client = new OpenAIClient(new Uri(AZURE_OPENAI_ENDPOINT), new Azure.AzureKeyCredential(AZURE_OPENAI_KEY));
+    useAzure = true;
+}
+else if (OPENAI_API_KEY is string)
+{
+    client = new OpenAIClient(OPENAI_API_KEY);
+}
+else
+{
+    throw new ArgumentException("Please provide either (AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, AZURE_DEPLOYMENT_NAME) or OPENAI_API_KEY");
+}
 
-var manager = AgentFactory.CreateManagerAgent(client);
-var pwshDeveloper = AgentFactory.CreatePwshDeveloperAgent(client, Environment.CurrentDirectory);
-var customerService = AgentFactory.CreateCustomerServiceAgent(client);
+var deployModelName = useAzure ? AZURE_DEPLOYMENT_NAME! : OPENAI_MODEL_ID;
+var manager = AgentFactory.CreateManagerAgent(client, modelName: deployModelName);
+var pwshDeveloper = AgentFactory.CreatePwshDeveloperAgent(client, Environment.CurrentDirectory, modelName: deployModelName);
+var customerService = AgentFactory.CreateCustomerServiceAgent(client, modelName: deployModelName);
 var pwshRunner = AgentFactory.CreatePwshRunnerAgent();
 
 var userAgent = new UserProxyAgent("user")
