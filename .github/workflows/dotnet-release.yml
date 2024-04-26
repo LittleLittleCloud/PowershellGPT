@@ -21,7 +21,6 @@ jobs:
   build:
     name: Build and release
     runs-on: ubuntu-latest
-    environment: dotnet
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -37,11 +36,6 @@ jobs:
         dotnet build --no-restore --configuration Release -bl /p:SignAssembly=true
     - name: Unit Test
       run: dotnet test --no-build -bl --configuration Release
-      env:
-        AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
-        AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
-        AZURE_GPT_35_MODEL_ID: ${{ secrets.AZURE_GPT_35_MODEL_ID }}
-        OEPNAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     - name: Pack
       run: |
         echo "Create release build package"
