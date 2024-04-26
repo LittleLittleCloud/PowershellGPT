@@ -44,7 +44,12 @@ internal class PowershellRunnerAgent : IAgent
             }
             else
             {
-                var successMessage = powershell.Streams.Information?.Select(e => e.ToString()).Aggregate((a, b) => $"{a}\n{b}") ?? "no output";
+                var information = powershell.Streams.Information;
+                string successMessage = "script run succeed without any output";
+                if (information is not null && information.Any())
+                {
+                    successMessage = information.Select(e => e.ToString()).Aggregate((a, b) => $"{a}\n{b}");
+                }
                 successMessage = @$"[SUCCESS]
 {successMessage}";
 
