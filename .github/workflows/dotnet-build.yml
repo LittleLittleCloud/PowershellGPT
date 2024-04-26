@@ -1,0 +1,58 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: dotnet-ci
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: global.json
+    - name: Restore dependencies
+      run: |
+        dotnet restore -bl
+    - name: Build
+      run: |
+        echo "Build PowershellGPT"
+        dotnet build --no-restore --configuration Release -bl /p:SignAssembly=true
+    - name: Unit Test
+      run: dotnet test --no-build -bl --configuration Release
+    - name: Pack
+      run: |
+        echo "Create nightly build package"
+        dotnet pack --no-build --configuration Release --output './output/nightly' -p:VersionSuffix=nightly-${{github.run_id}} -bl
+
+        echo "Create release build package"
+        dotnet pack --no-build --configuration Release --output './output/release' -bl
+
+        echo "ls output directory"
+        ls -R ./output
+    - name: Upload package
+      uses: actions/upload-artifact@v4
+      with:
+        name: nightly
+        path: ./dotnet/output/nightly
+    - name: Upload package
+      uses: actions/upload-artifact@v4
+      with:
+        name: release
+        path: ./dotnet/output/release

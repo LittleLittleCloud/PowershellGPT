@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="nuget/nuget-package.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AutoGenVersion>0.0.12</AutoGenVersion>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>pgpt</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoGen" Version="$(AutoGenVersion)" />
-    <!--<PackageReference Include="AutoGen.DotnetInteractive" Version="$(AutoGenVersion)" />-->
     <PackageReference Include="AutoGen.SourceGenerator" Version="$(AutoGenVersion)" />
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.2" />
   </ItemGroup>
-
 </Project>
