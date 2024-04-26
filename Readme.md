@@ -4,7 +4,7 @@ A dotnet tool which uses multi-agent workflow to resolve tasks using powershell 
 
 To those who struggles with lengthy powershell command.
 
-![NuGet Version](https://img.shields.io/nuget/v/PS.GPT) ![NuGet Downloads](https://img.shields.io/nuget/dt/PS.GPT)
+![NuGet Version](https://img.shields.io/nuget/v/PS.GPT)
 
 
 ### Get start
