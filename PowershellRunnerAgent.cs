@@ -6,7 +6,7 @@ using System.Linq;
 using System.Management.Automation;
 using System.Text;
 using System.Threading.Tasks;
-namespace PowershellGPT;
+namespace Powershell.GPT;
 
 internal class PowershellRunnerAgent : IAgent
 {

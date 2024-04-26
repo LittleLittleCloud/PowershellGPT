@@ -3,7 +3,7 @@ using AutoGen.OpenAI;
 using AutoGen.OpenAI.Extension;
 using Azure.AI.OpenAI;
 
-namespace PowershellGPT;
+namespace Powershell.GPT;
 
 internal static class AgentFactory
 {

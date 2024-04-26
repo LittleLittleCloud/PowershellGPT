@@ -1,6 +1,6 @@
-## PowershellGPT
+## Powershell.GPT
 
-A multi-agent workflow to resolve tasks using powershell scripts.
+A dotnet tool which uses multi-agent workflow to resolve tasks using powershell scripts.
 
 To those who struggles with lengthy powershell command.
 

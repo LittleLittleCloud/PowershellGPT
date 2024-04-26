@@ -3,7 +3,7 @@
 using AutoGen;
 using AutoGen.Core;
 using Azure.AI.OpenAI;
-using PowershellGPT;
+using Powershell.GPT;
 
 var AZURE_OPENAI_ENDPOINT = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new ArgumentNullException("AZURE_OPENAI_ENDPOINT");
 var AZURE_OPENAI_KEY = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY") ?? throw new ArgumentNullException("AZURE_OPENAI_API_KEY");
